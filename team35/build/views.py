@@ -1,14 +1,14 @@
 from django.shortcuts import render
 from django.shortcuts import  redirect
-from django.http import HttpResponse
+from django.contrib.auth import login as auth_login
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.contrib.auth import authenticate , login, logout, get_user
+from django.contrib.auth import authenticate, logout, get_user
 
 # Create your views here.
 def homepage(request):
     return render(request, 'build/index.html')
-    # return HttpResponse("OK")
+    #return HttpResponse("OK")
 
 def login(request):
     return render(request, 'build/login.html')
@@ -55,7 +55,7 @@ def handleLogin(request):
         user = authenticate(username = loginusername, password = loginpassword)
 
         if user is not None:
-            login(request, user)
+            auth_login(request, user)
             messages.success(request, 'Successfully Logged In')
             return redirect('/dashboard/')
         else:
