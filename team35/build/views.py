@@ -63,7 +63,13 @@ def handleLogin(request):
             return redirect('/')
 
 def profile(request):
+    
     return render(request, 'build/editprofile.html')
 
 def resume(request):
     return render(request, 'build/srt-resume.html')
+
+def handleuserLogout(request):
+    logout(request)
+    messages.success(request, 'Successfully Logged Out!!')
+    return redirect("/")

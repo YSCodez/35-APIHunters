@@ -26,4 +26,5 @@ urlpatterns = [
     path('handlelogin/', views.handleLogin),
     path('dashboard/', views.profile),
     path('resume/', views.resume),
+    path('logout/', views.handleuserLogout),
 ]

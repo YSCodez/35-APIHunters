@@ -315,7 +315,7 @@
     <nav>
         <div class="logo">
             <i class="bx bx-menu menu-icon"></i>
-            <span class="logo-name">Welcome X!</span>
+            <span class="logo-name">Welcome {{request.user}}</span>
         </div>
         <div class="sidebar">
             <div class="logo">
@@ -346,7 +346,7 @@
                     </li>
 
                     <li class="list">
-                        <a href="#" class="nav-link">
+                        <a href="/logout/" class="nav-link">
                             <i class="bx bx-log-out icon"></i>
                             <span class="link">Logout</span>
                         </a>
@@ -378,7 +378,7 @@
         <h2>Edit Your Profile</h2>
         <form>
             <div class="user-box">
-                <input type="password" name="" required="">
+                <input type="email" name="" required="">
                 <label>Email</label>
             </div>
             <div class="user-box">
@@ -386,19 +386,19 @@
                 <label>Graduated in</label>
             </div>
             <div class="user-box">
-                <input type="password" name="" required="">
+                <input type="text" name="" required="">
                 <label>Percentage/CGPA</label>
             </div>
             <div class="user-box">
-                <input type="password" name="" required="">
+                <input type="date" name="" required="">
                 <label>Year OF Graduation</label>
             </div>
             <div class="user-box">
-                <input type="password" name="" required="">
+                <input type="text" name="" required="">
                 <label>Skills</label>
             </div>
             <div class="user-box">
-                <input type="password" name="" required="">
+                <input type="text" name="" required="">
                 <label>Intrested Subjects</label>
             </div>
             <div class="user-box">
