@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>Login</title>
     <style>
         html {
             height: 100%;
@@ -189,16 +189,17 @@
 <body>
     <div class="login-box">
         <h2>Login</h2>
-        <form>
+        <form id="GFG" action="/handlelogin/" method="POST">
             <div class="user-box">
-                <input type="text" name="" required="">
+                <input type="text" id="loginusername" name="loginusername" required>
                 <label>Username</label>
             </div>
             <div class="user-box">
-                <input type="password" name="" required="">
+                <input type="password" id="loginpassword" name="loginpassword" required>
                 <label>Password</label>
             </div>
-            <a href="#">
+            {% csrf_token %}
+            <a onclick="myFunction()">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -207,6 +208,11 @@
             </a>
         </form>
     </div>
+    <script>
+        function myFunction() {
+            document.getElementById("GFG").submit();
+        }
+    </script>  
 </body>
 
 </html>

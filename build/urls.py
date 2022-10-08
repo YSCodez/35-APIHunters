@@ -21,4 +21,11 @@ urlpatterns = [
     path('', views.homepage),
     path('login/', views.login),
     path('register/', views.register),
+    path('userregister/', views.UserRegister),
+    path('editprofile/', views.editprofile),
+    path('handlelogin/', views.handleLogin),
+    path('dashboard/', views.profile),
+    path('resume/', views.resume),
+    path('logout/', views.handleuserLogout),
+    path('personaldet/', views.personaldetail),
 ]
