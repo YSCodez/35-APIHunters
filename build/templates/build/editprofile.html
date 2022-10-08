@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard</title>
+    <style>
+        /* Google Fonts - Poppins */
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 50px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            background: #fff;
+            box-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+        }
+
+        nav .logo {
+            display: flex;
+            align-items: center;
+            margin: 0 24px;
+        }
+
+        .logo .menu-icon {
+            color: #333;
+            font-size: 24px;
+            margin-right: 14px;
+            cursor: pointer;
+        }
+
+        .logo .logo-name {
+            color: #333;
+            font-size: 22px;
+            font-weight: 500;
+        }
+
+        nav .sidebar {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            height: 100%;
+            width: 260px;
+            padding: 20px 0;
+            background-color: #fff;
+            box-shadow: 0 5px 1px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+        }
+
+        nav.open .sidebar {
+            left: 0;
+        }
+
+        .sidebar .sidebar-content {
+            display: flex;
+            height: 100%;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 30px 16px;
+        }
+
+        .sidebar-content .list {
+            list-style: none;
+        }
+
+        .list .nav-link {
+            display: flex;
+            align-items: center;
+            margin: 8px 0;
+            padding: 14px 12px;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+
+        .lists .nav-link:hover {
+            background-color: #4070f4;
+        }
+
+        .nav-link .icon {
+            margin-right: 14px;
+            font-size: 20px;
+            color: #707070;
+        }
+
+        .nav-link .link {
+            font-size: 16px;
+            color: #707070;
+            font-weight: 400;
+        }
+
+        .lists .nav-link:hover .icon,
+        .lists .nav-link:hover .link {
+            color: #fff;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            height: 1000vh;
+            width: 200%;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.4s ease;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        nav.open~.overlay {
+            opacity: 1;
+            left: 260px;
+            pointer-events: auto;
+        }
+
+
+        html {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            min-height: 100%;
+            background: linear-gradient(#141e30, #243b55);
+        }
+
+        .login-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 900px;
+            height: 650px;
+            padding: 40px;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, .5);
+            box-sizing: border-box;
+           
+            border-radius: 30px;
+        }
+
+        .login-box h2 {
+            margin: 0 0 30px;
+            padding: 0;
+            color: #fff;
+            text-align: center;
+        }
+
+        .login-box .user-box {
+            position: relative;
+        }
+
+        .login-box .user-box input {
+            width: 100%;
+            padding: 10px 0;
+            font-size: 16px;
+            color: #fff;
+            margin-bottom: 30px;
+            border: none;
+            border-bottom: 1px solid #fff;
+            outline: none;
+            background: transparent;
+        }
+
+        .login-box .user-box label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 10px 0;
+            font-size: 16px;
+            color: #fff;
+            pointer-events: none;
+            transition: .5s;
+        }
+
+        .login-box .user-box input:focus~label,
+        .login-box .user-box input:valid~label {
+            top: -20px;
+            left: 0;
+            color: #03e9f4;
+            font-size: 12px;
+        }
+
+        .login-box form a {
+            position: relative;
+            display: inline-block;
+            padding: 10px 20px;
+            color: #03e9f4;
+            font-size: 16px;
+            text-decoration: none;
+            text-transform: uppercase;
+            overflow: hidden;
+            transition: .5s;
+            margin-top: 40px;
+            letter-spacing: 4px
+        }
+
+        .login-box a:hover {
+            background: #03e9f4;
+            color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 5px #03e9f4,
+                0 0 25px #03e9f4,
+                0 0 50px #03e9f4,
+                0 0 100px #03e9f4;
+        }
+
+        .login-box a span {
+            position: absolute;
+            display: block;
+        }
+
+        .login-box a span:nth-child(1) {
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #03e9f4);
+            animation: btn-anim1 1s linear infinite;
+        }
+
+        @keyframes btn-anim1 {
+            0% {
+                left: -100%;
+            }
+
+            50%,
+            100% {
+                left: 100%;
+            }
+        }
+
+        .login-box a span:nth-child(2) {
+            top: -100%;
+            right: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, transparent, #03e9f4);
+            animation: btn-anim2 1s linear infinite;
+            animation-delay: .25s
+        }
+
+        @keyframes btn-anim2 {
+            0% {
+                top: -100%;
+            }
+
+            50%,
+            100% {
+                top: 100%;
+            }
+        }
+
+        .login-box a span:nth-child(3) {
+            bottom: 0;
+            right: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(270deg, transparent, #03e9f4);
+            animation: btn-anim3 1s linear infinite;
+            animation-delay: .5s
+        }
+
+        @keyframes btn-anim3 {
+            0% {
+                right: -100%;
+            }
+
+            50%,
+            100% {
+                right: 100%;
+            }
+        }
+
+        .login-box a span:nth-child(4) {
+            bottom: -100%;
+            left: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(360deg, transparent, #03e9f4);
+            animation: btn-anim4 1s linear infinite;
+            animation-delay: .75s
+        }
+
+        @keyframes btn-anim4 {
+            0% {
+                bottom: -100%;
+            }
+
+            50%,
+            100% {
+                bottom: 100%;
+            }
+        }
+    </style>
+    <nav>
+        <div class="logo">
+            <i class="bx bx-menu menu-icon"></i>
+            <span class="logo-name">Welcome {{request.user}}</span>
+        </div>
+        <div class="sidebar">
+            <div class="logo">
+                <i class="bx bx-menu menu-icon"></i>
+                <span class="logo-name">Dashboard</span>
+            </div>
+
+            <div class="sidebar-content">
+                <ul class="lists">
+                    <li class="list">
+                        <a href="#" class="nav-link">
+                            <i class="bx bx-home-alt icon"></i>
+
+                            <span class="link">Profile</span>
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a href="#" class="nav-link">
+                            <i class="bx bx-bar-chart-alt-2 icon"></i>
+                            <span class="link">Edit Profile</span>
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a href="#" class="nav-link">
+                            <i class="bx bx-bell icon"></i>
+                            <span class="link">Resume Builder</span>
+                        </a>
+                    </li>
+
+                    <li class="list">
+                        <a href="/logout/" class="nav-link">
+                            <i class="bx bx-log-out icon"></i>
+                            <span class="link">Logout</span>
+                        </a>
+                    </li>
+            </div>
+        </div>
+    </nav>
+
+ <section class="overlay"></section>
+
+ <script>
+    const navBar = document.querySelector("nav"),
+        menuBtns = document.querySelectorAll(".menu-icon"),
+        overlay = document.querySelector(".overlay");
+
+    menuBtns.forEach((menuBtn) => {
+        menuBtn.addEventListener("click", () => {
+            navBar.classList.toggle("open");
+        });
+    });
+
+    overlay.addEventListener("click", () => {
+        navBar.classList.remove("open");
+    });
+ </script>
+</head>
+
+
+
+
+<body>
+  
+
+  
+
+  <div class="login-box">
+    
+        <h2>Edit Your Profile</h2>
+        <form method="POST" id="personal" action="/personaldet/">
+            
+            <div>
+            <div class="user-box">
+                <input type="email" name="email" required="">
+                <label>Email</label>
+            </div>
+            <div class="user-box">
+                <input type="text" name="graduate" required="">
+                <label>Graduated in</label>
+            </div>
+            <div class="user-box">
+                <input type="text" name="percentage" required="">
+                <label>Percentage/CGPA</label>
+            </div>
+            <div class="user-box">
+                <input type="date" name="yearofgraduation" required="">
+                <label>Year OF Graduation</label>
+            </div>
+            <div class="user-box">
+                <input type="text" name="skills" required="">
+                <label>Skills</label>
+            </div>
+            <div class="user-box">
+                <input type="text" name="interestedsub" required="">
+                <label>Intrested Subjects</label>
+            </div>
+        </div>
+
+        {% csrf_token %}
+        <a onclick="myFunction()">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                Submit
+            </a>
+        </form>
+    </div>
+    <script>
+        function myFunction() {
+            document.getElementById("personal").submit();
+        }
+    </script>  
+</body>
+
+</html>
